@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Playlist Extractor - IDM Download Links</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="title">🎬 YouTube Playlist Extractor</h1>
+            <p class="subtitle">Generate direct download links for IDM with auto-filename support</p>
+        </header>
+
+        <!-- Step 1: URL Input -->
+        <section class="input-section" id="inputSection">
+            <div class="card">
+                <h2 class="section-title">Step 1: Enter Playlist URL</h2>
+
+                <div class="input-group">
+                    <input type="text" id="playlistUrl" class="url-input"
+                        placeholder="https://www.youtube.com/playlist?list=PLxxxxx" autocomplete="off">
+                </div>
+
+                <div class="quality-selector">
+                    <label for="defaultQuality" class="quality-label">
+                        Default Quality (applied to all videos):
+                    </label>
+                    <select id="defaultQuality" class="quality-select">
+                        <option value="best">Best Available</option>
+                        <option value="1080p">1080p (Full HD)</option>
+                        <option value="720p">720p (HD)</option>
+                        <option value="480p">480p (SD)</option>
+                        <option value="360p">360p (Low)</option>
+                    </select>
+                </div>
+
+                <button id="fetchBtn" class="btn btn-primary">
+                    <span class="btn-text">Fetch Playlist</span>
+                    <span class="spinner" style="display: none;">⏳</span>
+                </button>
+
+                <div id="errorMessage" class="error-message" style="display: none;"></div>
+            </div>
+        </section>
+
+        <!-- Step 2: Video Selection -->
+        <section class="video-section" id="videoSection" style="display: none;">
+            <div class="card">
+                <div class="section-header">
+                    <h2 class="section-title">Step 2: Select Videos</h2>
+                    <div class="playlist-info">
+                        <span id="playlistTitle" class="playlist-title"></span>
+                        <span id="videoCount" class="video-count"></span>
+                    </div>
+                </div>
+
+                <div class="selection-controls">
+                    <button id="selectAllBtn" class="btn btn-secondary">☑️ Select All</button>
+                    <button id="deselectAllBtn" class="btn btn-secondary">☐ Deselect All</button>
+                    <span id="selectedCount" class="selected-count">0 selected</span>
+                </div>
+
+                <div id="videoList" class="video-list"></div>
+
+                <button id="generateBtn" class="btn btn-primary" style="display: none;">
+                    <span class="btn-text">Generate Download Links</span>
+                    <span class="spinner" style="display: none;">⏳</span>
+                </button>
+
+                <div id="progressBar" class="progress-bar" style="display: none;">
+                    <div class="progress-fill" id="progressFill"></div>
+                    <span class="progress-text" id="progressText">Processing...</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 3: Download -->
+        <section class="download-section" id="downloadSection" style="display: none;">
+            <div class="card">
+                <h2 class="section-title">✅ Links Generated Successfully!</h2>
+
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Total Videos:</span>
+                        <span id="totalVideos" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Successful:</span>
+                        <span id="successCount" class="stat-value success">0</span>
+                    </div>
+                    <div class="stat-item" id="failedStat" style="display: none;">
+                        <span class="stat-label">Failed:</span>
+                        <span id="failedCount" class="stat-value error">0</span>
+                    </div>
+                </div>
+
+                <div class="download-actions">
+                    <button id="copyBtn" class="btn btn-success">
+                        📋 Copy to Clipboard
+                    </button>
+                    <button id="downloadBtn" class="btn btn-success">
+                        💾 Download .txt File
+                    </button>
+                </div>
+
+                <div id="previewSection" class="preview-section">
+                    <h3 class="preview-title">Preview (first 3 URLs):</h3>
+                    <pre id="previewContent" class="preview-content"></pre>
+                </div>
+
+                <div id="copySuccess" class="success-message" style="display: none;">
+                    ✅ Copied to clipboard!
+                </div>
+
+                <button id="resetBtn" class="btn btn-secondary">
+                    🔄 Extract Another Playlist
+                </button>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>💡 <strong>Tip:</strong> URLs include video titles for IDM auto-naming!</p>
+            <p>⚠️ <strong>Note:</strong> URLs expire after several hours. Use them promptly.</p>
+        </footer>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+
+</html>
